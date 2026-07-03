@@ -1,0 +1,59 @@
+/* SeaMarket Custom Styles */
+
+:root {
+    /* Color palette */
+    --color-ocean-blue: #0B5ED7;
+    --color-sea-green: #2E8B57;
+    --color-white: #ffffff;
+    --color-light-bg: #f0f8ff;
+    --color-primary: var(--color-sea-green);
+    --color-primary-dark: #256e45;
+}
+
+/* Reset and base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--color-light-bg);
+    color: #212529;
+    line-height: 1.5;
+}
+
+/* Utility classes */
+.mt-5 { margin-top: 3rem !important; }
+.mb-5 { margin-bottom: 3rem !important; }
+.text-center { text-align: center !important; }
+
+/* Button Primary */
+.btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white);
+}
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+}
+
+/* Card */
+.card {
+    border: none;
+    border-radius: .75rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,.07);
+}
+
+/* Form */
+.form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 .2rem rgba(46,139,87,.25);
+}
+
+/* Responsive layout */
+@media (max-width: 576px) {
+    .container { padding-left: .75rem; padding-right: .75rem; }
+}

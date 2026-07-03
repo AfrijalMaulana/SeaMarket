@@ -1,0 +1,3 @@
+-- SeaMarket Database Schema Placeholder
+-- This file will contain the SQL statements to create the database schema.
+-- The actual tables will be designed and added in Sprint 2.

@@ -1,0 +1,21 @@
+# Git ignore rules for SeaMarket project
+
+# Ignore uploaded files (keep .gitkeep if needed)
+uploads/*
+!uploads/.gitkeep
+
+# Environment configuration
+.env
+
+# Log files
+*.log
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# Node modules (if any front‑end tooling)
+node_modules/
+
+# Composer vendor directory (if using Composer later)
+vendor/
