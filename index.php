@@ -1,303 +1,219 @@
 <?php
-/**
- * SeaMarket Landing Page
- * Entry point for http://localhost/seamarket
- */
+require_once 'config/app.php';
+require_once 'config/session.php';
+$pageTitle = 'Beranda';
+include 'includes/header.php';
+include 'includes/navbar.php';
+include 'includes/alert.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SeaMarket - Platform Pemasaran Hasil Panen Rumput Laut</title>
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="/seamarket/assets/css/style.css">
-</head>
-<body style="font-family: 'Poppins', sans-serif;">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">SeaMarket</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">Tentang</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#products">Produk</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#how-it-works">Cara Kerja</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-outline-primary ms-2" href="#login">Login</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-primary ms-2 text-white" href="#register">Daftar</a></li>
-                </ul>
+
+<!-- Hero Section -->
+<section class="py-5 text-center text-white position-relative overflow-hidden" style="background: linear-gradient(135deg,#0B5ED7 0%,#2E8B57 100%); min-height: 80vh; display:flex; align-items:center;">
+  <div class="container position-relative z-1">
+    <div class="row align-items-center">
+      <div class="col-lg-6 text-start">
+        <span class="badge bg-white text-primary mb-3 px-3 py-2 fs-6 rounded-pill">🌊 Platform Rumput Laut #1 Indonesia</span>
+        <h1 class="display-4 fw-bold mb-4">Pasarkan Hasil Panen<br>Rumput Laut ke<br><span style="color:#a8f5c8;">Seluruh Indonesia</span></h1>
+        <p class="lead mb-4 text-white-50">SeaMarket membantu petani rumput laut memasarkan hasil panen mereka secara mudah, cepat, dan dengan harga yang transparan.</p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="#products" class="btn btn-light btn-lg px-4 rounded-pill fw-semibold">
+            <i class="bi bi-bag me-2"></i>Belanja Sekarang
+          </a>
+          <a href="<?= BASE_URL ?>auth/register.php" class="btn btn-outline-light btn-lg px-4 rounded-pill">
+            <i class="bi bi-shop me-2"></i>Jadi Penjual
+          </a>
+        </div>
+        <div class="d-flex gap-4 mt-4">
+          <div><div class="fw-bold fs-4">500+</div><div class="small text-white-50">Penjual</div></div>
+          <div><div class="fw-bold fs-4">10K+</div><div class="small text-white-50">Pembeli</div></div>
+          <div><div class="fw-bold fs-4">50K+</div><div class="small text-white-50">Transaksi</div></div>
+        </div>
+      </div>
+      <div class="col-lg-6 d-none d-lg-flex justify-content-center">
+        <img src="<?= BASE_URL ?>assets/images/hero.png" alt="SeaMarket Hero" class="img-fluid" style="max-height:420px;" onerror="this.style.display='none'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-5">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-3">Tentang <span class="text-primary">SeaMarket</span></h2>
+        <p class="text-muted">SeaMarket merupakan platform yang mempertemukan petani atau penjual rumput laut dengan pembeli dari seluruh Indonesia. Kami mengatasi pemasaran konvensional, ketergantungan pada pengepul, dan harga jual yang tidak optimal.</p>
+        <p class="text-muted">Dengan teknologi modern, petani dapat langsung terhubung dengan pembeli tanpa perantara, sehingga keuntungan lebih besar dan harga lebih adil.</p>
+        <a href="<?= BASE_URL ?>auth/register.php" class="btn btn-primary mt-2">Bergabung Sekarang</a>
+      </div>
+      <div class="col-md-6">
+        <div class="row g-3">
+          <div class="col-6"><div class="card border-0 shadow-sm text-center p-3"><i class="bi bi-people-fill display-5 text-primary mb-2"></i><div class="fw-semibold">Komunitas Petani</div></div></div>
+          <div class="col-6"><div class="card border-0 shadow-sm text-center p-3"><i class="bi bi-graph-up-arrow display-5 text-success mb-2"></i><div class="fw-semibold">Harga Optimal</div></div></div>
+          <div class="col-6"><div class="card border-0 shadow-sm text-center p-3"><i class="bi bi-shield-check display-5 text-warning mb-2"></i><div class="fw-semibold">Transaksi Aman</div></div></div>
+          <div class="col-6"><div class="card border-0 shadow-sm text-center p-3"><i class="bi bi-headset display-5 text-info mb-2"></i><div class="fw-semibold">Support 24/7</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-5" style="background:linear-gradient(135deg,#f0f8ff,#e8f5e9);">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-2">Keunggulan SeaMarket</h2>
+    <p class="text-center text-muted mb-5">Kenapa ribuan petani memilih kami?</p>
+    <div class="row g-4">
+      <?php
+      $features = [
+        ['bi-award-fill','#0B5ED7','Produk Berkualitas','Semua produk melewati seleksi kualitas ketat sebelum ditampilkan.'],
+        ['bi-currency-dollar','#2E8B57','Harga Transparan','Tidak ada biaya tersembunyi. Harga langsung dari petani ke pembeli.'],
+        ['bi-shield-lock-fill','#fd7e14','Transaksi Aman','Sistem escrow memastikan uang aman sampai barang diterima.'],
+        ['bi-truck','#6f42c1','Pengiriman Cepat','Mitra logistik terpercaya di seluruh Indonesia.'],
+      ];
+      foreach ($features as [$icon, $color, $title, $desc]): ?>
+      <div class="col-md-3 col-sm-6">
+        <div class="card text-center h-100 border-0 shadow-sm p-3" style="border-top:4px solid <?= $color ?> !important;">
+          <div class="card-body">
+            <div class="rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width:70px;height:70px;background:<?= $color ?>20;">
+              <i class="bi <?= $icon ?> fs-2" style="color:<?= $color ?>;"></i>
             </div>
+            <h5 class="card-title fw-semibold"><?= $title ?></h5>
+            <p class="card-text text-muted small"><?= $desc ?></p>
+          </div>
         </div>
-    </nav>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
 
-    <!-- Hero Section -->
-    <section class="py-5 bg-light" id="hero">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h1 class="display-4 fw-bold mb-3" style="color: var(--color-ocean-blue);">Pasarkan Hasil Panen Rumput Laut Anda ke Seluruh Indonesia</h1>
-                    <p class="lead mb-4">SeaMarket membantu petani dan penjual rumput laut menjangkau lebih banyak pembeli secara mudah, cepat, dan terpercaya.</p>
-                    <a href="#products" class="btn btn-primary btn-lg me-2">Mulai Belanja</a>
-                    <a href="#register" class="btn btn-outline-primary btn-lg">Menjadi Penjual</a>
-                </div>
-                <div class="col-lg-6 text-center">
-                    <img src="https://via.placeholder.com/500x300?text=Sea+Market+Illustration" class="img-fluid" alt="Illustrasi SeaMarket" />
-                </div>
+<!-- How It Works -->
+<section id="how-it-works" class="py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-2">Cara Kerja</h2>
+    <p class="text-center text-muted mb-5">4 langkah mudah untuk mulai berbelanja</p>
+    <div class="row justify-content-center">
+      <?php
+      $steps = [
+        ['bi-person-plus-fill','Daftar','Buat akun gratis sebagai pembeli atau penjual.'],
+        ['bi-search','Cari Produk','Temukan produk rumput laut sesuai kebutuhan.'],
+        ['bi-cart-check-fill','Checkout','Pesan dan lakukan pembayaran yang aman.'],
+        ['bi-truck','Terima Produk','Produk dikirim langsung ke lokasi Anda.'],
+      ];
+      foreach ($steps as $i => [$icon, $title, $desc]): ?>
+      <div class="col-md-3 text-center position-relative mb-4">
+        <?php if ($i < 3): ?>
+        <div class="d-none d-md-block position-absolute top-0" style="right:-15%;top:30px!important;width:30%;height:2px;background:linear-gradient(90deg,#0B5ED7,#2E8B57);z-index:0;"></div>
+        <?php endif; ?>
+        <div class="step-circle text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center shadow" style="width:70px;height:70px;background:linear-gradient(135deg,#0B5ED7,#2E8B57);font-size:1.5rem;position:relative;z-index:1;">
+          <i class="bi <?= $icon ?>"></i>
+        </div>
+        <h5 class="fw-semibold"><?= $title ?></h5>
+        <p class="text-muted small"><?= $desc ?></p>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products -->
+<section id="products" class="py-5 bg-light">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h2 class="fw-bold mb-1">Produk Unggulan</h2>
+        <p class="text-muted mb-0">Produk rumput laut terlaris pilihan pembeli</p>
+      </div>
+      <a href="<?= BASE_URL ?>customer/produk.php" class="btn btn-outline-primary">Lihat Semua</a>
+    </div>
+    <div class="row g-4">
+      <?php
+      $products = [
+        ['Rumput Laut Kering Grade A','Lombok, NTB',120000,''],
+        ['Agar-Agar Segar Premium','Makassar, Sulsel',85000,''],
+        ['Rumput Laut Basah Segar','Takalar, Sulsel',45000,''],
+        ['Karaginan Olahan','Sumenep, Jatim',200000,''],
+        ['Rumput Laut Kering Kotoni','Nunukan, Kaltara',110000,''],
+        ['Nori Rumput Laut Lokal','Jepara, Jateng',75000,''],
+        ['Rumput Laut Spinosum','Flores, NTT',60000,''],
+        ['Pupuk Rumput Laut Organik','Banyuwangi, Jatim',95000,''],
+      ];
+      foreach ($products as $i => [$name, $location, $price, $img]): ?>
+      <div class="col-md-3 col-sm-6">
+        <div class="card h-100 shadow-sm border-0 product-card" style="border-radius:12px;overflow:hidden;transition:.3s;">
+          <div class="position-relative">
+            <img src="<?= BASE_URL ?>assets/images/placeholder.png" class="card-img-top" alt="<?= htmlspecialchars($name) ?>" style="height:180px;object-fit:cover;" onerror="this.src='https://via.placeholder.com/300x180/0B5ED7/ffffff?text=Produk'">
+            <span class="badge bg-primary position-absolute top-0 end-0 m-2">Unggulan</span>
+          </div>
+          <div class="card-body d-flex flex-column">
+            <h6 class="card-title fw-semibold"><?= htmlspecialchars($name) ?></h6>
+            <p class="text-primary fw-bold mb-1">Rp <?= number_format($price) ?></p>
+            <p class="card-text text-muted small mb-1"><i class="bi bi-shop me-1"></i>Penjual <?= $i+1 ?></p>
+            <p class="card-text text-muted small mb-3"><i class="bi bi-geo-alt me-1"></i><?= $location ?></p>
+            <div class="mt-auto d-flex gap-2">
+              <a href="<?= BASE_URL ?>customer/product-detail.php?id=<?= $i+1 ?>" class="btn btn-primary btn-sm flex-grow-1">
+                <i class="bi bi-eye me-1"></i>Detail
+              </a>
+              <a href="<?= BASE_URL ?>customer/keranjang.php?add=<?= $i+1 ?>" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-cart-plus"></i>
+              </a>
             </div>
+          </div>
         </div>
-    </section>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
 
-    <!-- Keunggulan Section -->
-    <section class="py-5" id="keunggulan">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 text-center border-0">
-                        <div class="card-body">
-                            <div class="mb-3 display-4">🌊</div>
-                            <h5 class="card-title">Produk Berkualitas</h5>
-                            <p class="card-text">Kualitas terjamin dari petani terpercaya.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 text-center border-0">
-                        <div class="card-body">
-                            <div class="mb-3 display-4">🚚</div>
-                            <h5 class="card-title">Pengiriman Mudah</h5>
-                            <p class="card-text">Logistik cepat ke seluruh Indonesia.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 text-center border-0">
-                        <div class="card-body">
-                            <div class="mb-3 display-4">💰</div>
-                            <h5 class="card-title">Harga Transparan</h5>
-                            <p class="card-text">Tidak ada biaya tersembunyi.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 text-center border-0">
-                        <div class="card-body">
-                            <div class="mb-3 display-4">🤝</div>
-                            <h5 class="card-title">Transaksi Aman</h5>
-                            <p class="card-text">Pembayaran terjamin dan aman.</p>
-                        </div>
-                    </div>
-                </div>
+<!-- Testimonials -->
+<section id="testimonials" class="py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-2">Testimoni Pelanggan</h2>
+    <p class="text-center text-muted mb-5">Apa kata mereka tentang SeaMarket?</p>
+    <div class="row g-4">
+      <?php
+      $testimonials = [
+        ['Budi Santoso','Petani Rumput Laut, Lombok','SeaMarket memudahkan saya menemukan pembeli langsung. Pendapatan saya naik 40% dibanding jual ke pengepul!','bi-star-fill'],
+        ['Siti Lestari','Pengusaha Kuliner, Jakarta','Harga transparan dan produk berkualitas. Tidak ada perantara yang merugikan. Sangat puas!','bi-star-fill'],
+        ['Ahmad Ridwan','Importir Makanan, Surabaya','Pengiriman tepat waktu, produk sampai dalam kondisi sangat baik. Sudah order 10x!','bi-star-fill'],
+      ];
+      foreach ($testimonials as [$name, $role, $text, $icon]): ?>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-2">
+          <div class="card-body">
+            <div class="text-warning mb-3">
+              <?php for($s=0;$s<5;$s++) echo '<i class="bi bi-star-fill"></i>'; ?>
             </div>
-        </div>
-    </section>
-
-    <!-- Cara Kerja Section -->
-    <section class="py-5 bg-light" id="how-it-works">
-        <div class="container">
-            <h2 class="text-center mb-5">Cara Kerja</h2>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                        <div class="display-5 mb-3">①</div>
-                        <h5>Daftar Akun</h5>
-                        <p>Buat akun gratis dalam hitungan menit.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                        <div class="display-5 mb-3">②</div>
-                        <h5>Pilih Produk</h5>
-                        <p>Temukan produk rumput laut yang diinginkan.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                        <div class="display-5 mb-3">③</div>
-                        <h5>Checkout</h5>
-                        <p>Lakukan pembayaran dengan metode aman.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                        <div class="display-5 mb-3">④</div>
-                        <h5>Produk Dikirim</h5>
-                        <p>Produk tiba tepat waktu di lokasi Anda.</p>
-                    </div>
-                </div>
+            <p class="card-text fst-italic">"<?= $text ?>"</p>
+            <div class="d-flex align-items-center gap-3 mt-3">
+              <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" style="width:48px;height:48px;">
+                <i class="bi bi-person-fill text-primary fs-4"></i>
+              </div>
+              <div>
+                <div class="fw-semibold"><?= $name ?></div>
+                <div class="text-muted small"><?= $role ?></div>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
 
-    <!-- Produk Unggulan Section -->
-    <section class="py-5" id="products">
-        <div class="container">
-            <h2 class="text-center mb-5">Produk Unggulan</h2>
-            <div class="row g-4">
-                <!-- Repeat 6 times -->
-                <div class="col-md-4 col-lg-2">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <img src="https://via.placeholder.com/300x200?text=Produk+1" class="card-img-top" alt="Produk 1">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Produk Rumput Laut A</h5>
-                            <p class="card-text mb-1"><strong>Rp 150.000</strong></p>
-                            <p class="card-text mb-1">Penjual: Pak Budi</p>
-                            <p class="card-text mb-2">Lokasi: Bali</p>
-                            <a href="#" class="btn btn-primary btn-sm">Detail</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-2">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <img src="https://via.placeholder.com/300x200?text=Produk+2" class="card-img-top" alt="Produk 2">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Produk Rumput Laut B</h5>
-                            <p class="card-text mb-1"><strong>Rp 200.000</strong></p>
-                            <p class="card-text mb-1">Penjual: Ibu Siti</p>
-                            <p class="card-text mb-2">Lokasi: Lombok</p>
-                            <a href="#" class="btn btn-primary btn-sm">Detail</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-2">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <img src="https://via.placeholder.com/300x200?text=Produk+3" class="card-img-top" alt="Produk 3">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Produk Rumput Laut C</h5>
-                            <p class="card-text mb-1"><strong>Rp 180.000</strong></p>
-                            <p class="card-text mb-1">Penjual: Pak Joko</p>
-                            <p class="card-text mb-2">Lokasi: Jawa Barat</p>
-                            <a href="#" class="btn btn-primary btn-sm">Detail</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-2">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <img src="https://via.placeholder.com/300x200?text=Produk+4" class="card-img-top" alt="Produk 4">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Produk Rumput Laut D</h5>
-                            <p class="card-text mb-1"><strong>Rp 210.000</strong></p>
-                            <p class="card-text mb-1">Penjual: Bu Ani</p>
-                            <p class="card-text mb-2">Lokasi: Sulawesi</p>
-                            <a href="#" class="btn btn-primary btn-sm">Detail</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-2">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <img src="https://via.placeholder.com/300x200?text=Produk+5" class="card-img-top" alt="Produk 5">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Produk Rumput Laut E</h5>
-                            <p class="card-text mb-1"><strong>Rp 175.000</strong></p>
-                            <p class="card-text mb-1">Penjual: Pak Dedi</p>
-                            <p class="card-text mb-2">Lokasi: Nusa Tenggara</p>
-                            <a href="#" class="btn btn-primary btn-sm">Detail</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-2">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <img src="https://via.placeholder.com/300x200?text=Produk+6" class="card-img-top" alt="Produk 6">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Produk Rumput Laut F</h5>
-                            <p class="card-text mb-1"><strong>Rp 190.000</strong></p>
-                            <p class="card-text mb-1">Penjual: Ibu Rina</p>
-                            <p class="card-text mb-2">Lokasi: Kalimantan</p>
-                            <a href="#" class="btn btn-primary btn-sm">Detail</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Call to Action -->
+<section id="contact" class="py-5 text-center text-white" style="background:linear-gradient(135deg,#0B5ED7,#2E8B57);">
+  <div class="container">
+    <h2 class="fw-bold mb-3">Bergabunglah dengan SeaMarket Sekarang!</h2>
+    <p class="lead mb-4 text-white-50">Mulai jual atau beli produk rumput laut berkualitas dari seluruh Indonesia.</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="<?= BASE_URL ?>auth/register.php" class="btn btn-light btn-lg px-5 rounded-pill fw-semibold">Daftar Gratis</a>
+      <a href="<?= BASE_URL ?>auth/login.php" class="btn btn-outline-light btn-lg px-5 rounded-pill">Login</a>
+    </div>
+  </div>
+</section>
 
-    <!-- About SeaMarket Section -->
-    <section class="py-5 bg-light" id="about">
-        <div class="container">
-            <h2 class="text-center mb-4">Tentang SeaMarket</h2>
-            <p class="lead text-center">SeaMarket merupakan platform yang memfasilitasi petani rumput laut untuk memasarkan hasil panen mereka secara digital, menjangkau pasar nasional, meningkatkan pendapatan, dan mengurangi perantara.</p>
-        </div>
-    </section>
-
-    <!-- Testimoni Section -->
-    <section class="py-5" id="testimonials">
-        <div class="container">
-            <h2 class="text-center mb-5">Testimoni Pelanggan</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body">
-                            <p class="card-text">"SeaMarket memudahkan saya menemukan pembeli untuk hasil panen rumput laut. Prosesnya cepat dan aman!"</p>
-                            <h6 class="card-subtitle mb-2 text-muted">- Budi Santoso</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body">
-                            <p class="card-text">"Saya dapat menjual produk dengan harga yang transparan tanpa takut penipuan. Sangat rekomended!"</p>
-                            <h6 class="card-subtitle mb-2 text-muted">- Siti Lestari</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body">
-                            <p class="card-text">"Logistik pengiriman cepat, produk sampai tepat waktu, dan kualitas tetap terjaga."</p>
-                            <h6 class="card-subtitle mb-2 text-muted">- Ahmad Fauzi</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-white text-center py-4 shadow-inner">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <h5 class="mb-3">SeaMarket</h5>
-                    <p>Platform Pemasaran Hasil Panen Rumput Laut</p>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <h5 class="mb-3">Menu</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-decoration-none">Beranda</a></li>
-                        <li><a href="#about" class="text-decoration-none">Tentang</a></li>
-                        <li><a href="#products" class="text-decoration-none">Produk</a></li>
-                        <li><a href="#how-it-works" class="text-decoration-none">Cara Kerja</a></li>
-                        <li><a href="#contact" class="text-decoration-none">Kontak</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <h5 class="mb-3">Kontak</h5>
-                    <p>Email: info@seamarket.id</p>
-                    <p>Phone: +62 812 3456 7890</p>
-                    <div>
-                        <a href="#" class="me-2"><img src="https://via.placeholder.com/24?text=F" alt="Facebook" /></a>
-                        <a href="#" class="me-2"><img src="https://via.placeholder.com/24?text=I" alt="Instagram" /></a>
-                        <a href="#"><img src="https://via.placeholder.com/24?text=T" alt="Twitter" /></a>
-                    </div>
-                </div>
-            </div>
-            <hr class="my-4" />
-            <p class="mb-0 text-muted">&copy; 2026 SeaMarket. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Bootstrap Bundle JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="/seamarket/assets/js/app.js"></script>
-</body>
-</html>
+<?php include 'includes/footer.php'; ?>
